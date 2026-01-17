@@ -8,6 +8,9 @@ class Solution {
         return true;
     }
     public boolean checkInclusion(String s1, String s2) {
+        if(s1.length()>s2.length()){
+            return false;
+        }
         int k=s1.length();
         int l=0;
 
