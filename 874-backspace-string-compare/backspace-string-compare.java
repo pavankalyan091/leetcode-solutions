@@ -1,24 +1,48 @@
 class Solution {
-    
-    public static String getStringComp(String s1){
-        StringBuilder sb =new StringBuilder();
-        int n=s1.length();
-        int hashCount=0;
-        for(int i=n-1;i>=0;i--){
-            if(s1.charAt(i)=='#'){
-                hashCount++;
-            }else if(hashCount>0){
-                hashCount--;
-            }else{
-                sb.insert(0,s1.charAt(i));
-            }
-        }
-        return sb.toString();
-    }
-
-
-
     public boolean backspaceCompare(String s, String t) {
-        return getStringComp(s).equals(getStringComp(t));
+        int i=s.length()-1;
+        int j=t.length()-1;
+        int sSkip=0;
+        int tSkip=0;
+        while(i>=0 || j>=0){
+            
+
+            while(i>=0){
+                if(s.charAt(i)=='#'){
+                    sSkip++;
+                    i--;
+                }else if(sSkip>0){
+                    sSkip--;
+                    i--;
+                }else{
+                    break;
+                }
+            }
+
+            while(j>=0){
+                if(t.charAt(j)=='#'){
+                    tSkip++;
+                    j--;
+                }else if(tSkip>0){
+                    tSkip--;
+                    j--;
+                }else{
+                    break;
+                }
+            }
+
+        if(i>=0 && j>=0){
+            if(s.charAt(i)!=t.charAt(j)){
+                return false;
+            } 
+        }else{
+            if(i>=0 || j>=0){
+                return false;
+            } 
+        }
+        i--;
+        j--;
+    }
+        return true;
     }
 }
