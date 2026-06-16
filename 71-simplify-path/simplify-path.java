@@ -1,26 +1,26 @@
 class Solution {
     public String simplifyPath(String path) {
-        Deque<String> stack = new ArrayDeque<>();
-        String[] parts = path.split("/");
-
-        for (String part : parts) {
-            if (part.equals("") || part.equals(".")) {
+        Stack<String>st=new Stack<>();
+        String parts[]=path.split("/");
+        for(String part:parts){
+            if(part.equals(".")||part.equals("")){
                 continue;
-            } else if (part.equals("..")) {
-                if (!stack.isEmpty()) {
-                    stack.pop();
+            }
+            if(part.equals("..")){
+                if(!st.isEmpty()){
+                    st.pop();
                 }
-            } else {
-                stack.push(part);
+            }else{
+                st.push(part);
             }
         }
 
-        // Build result
-        StringBuilder result = new StringBuilder();
-        while (!stack.isEmpty()) {
-            result.insert(0, "/" + stack.pop());
+        StringBuilder sb=new StringBuilder();
+        for(String s:st){
+            sb.append("/");
+            sb.append(s);
         }
-
-        return result.length() == 0 ? "/" : result.toString();
+        
+        return sb.length()==0 ? "/" : sb.toString();
     }
 }
